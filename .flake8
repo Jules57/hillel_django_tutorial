@@ -1,0 +1,11 @@
+[flake8]
+exclude =
+    .git,
+    .gitignore,
+    migrations,
+    __pycache__,
+    venv,
+    .env,
+    tests.py
+
+max-line-length = 119
