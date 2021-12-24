@@ -29,3 +29,9 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+# def contact_form(request):
+#     form = ContactForm()
+#     return render(request, 'polls/contact_form.html', {
+#         'form' : form,
+#     })
