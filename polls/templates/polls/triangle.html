@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Triangle</title>
+</head>
+<body>
+
+{% if hypo %}
+<p>The hypotenuse is {{ hypo|floatformat }}</p>
+
+{% else %}
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form }}
+    </table>
+    <input type="submit" value="Send">
+</form>
+{% endif %}
+
+</body>
+</html>
