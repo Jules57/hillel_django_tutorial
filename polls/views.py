@@ -1,9 +1,12 @@
+import math
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
+from .forms import ContactForm, TriangleForm
 from .models import Choice, Question
 
 
@@ -54,3 +57,27 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+
+def get_hypo(request):
+    if request.method == "POST":
+        form = TriangleForm(request.POST)
+        if form.is_valid():
+            leg1 = form.cleaned_data['leg1']
+            leg2 = form.cleaned_data['leg2']
+            hypo = math.sqrt(leg1**2 + leg2**2)
+
+    else:
+        form = TriangleForm()
+        hypo = None
+    return render(request, 'polls/triangle.html', {'form': form, 'hypo': hypo})
+
+
+def home(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            pass  # does nothing, just trigger the validation
+    else:
+        form = ContactForm()
+    return render(request, 'polls/home.html', {'form': form})

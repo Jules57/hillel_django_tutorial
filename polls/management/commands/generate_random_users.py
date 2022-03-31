@@ -1,4 +1,6 @@
+from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
+
 from faker import Faker
 
 
@@ -17,4 +19,6 @@ class Command(BaseCommand):
             user_name = faker.user_name()
             user_email = faker.email()
             user_password = faker.password()
-            self.stdout.write(f'Username: {user_name}, email: {user_email}, password: {user_password}')
+            user, created = User.objects.update_or_create(username=user_name, email=user_email, password=user_password)
+            # self.stdout.write(f'Username: {user_name}, email: {user_email}, password: {user_password}')
+            self.stdout.write(str(user))
