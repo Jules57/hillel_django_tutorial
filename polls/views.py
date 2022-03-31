@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
-from .forms import TriangleForm
+from .forms import ContactForm, TriangleForm
 from .models import Choice, Question
 
 
@@ -71,3 +71,13 @@ def get_hypo(request):
         form = TriangleForm()
         hypo = None
     return render(request, 'polls/triangle.html', {'form': form, 'hypo': hypo})
+
+
+def home(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            pass  # does nothing, just trigger the validation
+    else:
+        form = ContactForm()
+    return render(request, 'polls/home.html', {'form': form})

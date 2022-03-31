@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     path('<int:question_id>/vote/', views.vote, name='vote'),
     path('triangle/', views.get_hypo, name='triangle'),
+    path('home/', views.home, name='home'),
 ]
